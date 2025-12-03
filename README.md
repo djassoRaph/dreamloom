@@ -1,84 +1,183 @@
-# DreamLoom 🌙
+# 🌙 DreamLoom - Open Dreams
 
-**An open-source, AI-enhanced spiritual successor to Furcadia**
+**A cozy isometric social MMO for storytellers, roleplayers, and world builders.**
 
-*Isometric social worlds meet tabletop RPG mechanics*
+DreamLoom is an open-source, self-hostable graphical social world inspired by Furcadia, combining classic isometric MMO charm with modern RPG tools and AI-enhanced creativity.
 
-[![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
+## 🎮 What is DreamLoom?
 
----
+- **Cozy isometric worlds** for social interaction and roleplay
+- **User-created spaces** ("dreams") with simple scripting
+- **Light RPG mechanics** (dice, stats) for structured play
+- **AI-enhanced creativity** turning text into generated art
+- **Self-hostable shards** for community autonomy
 
-## What is DreamLoom?
+## 📁 Project Structure
 
-DreamLoom is a community-driven project to create a modern, open-source graphical social world inspired by [Furcadia](https://www.furcadia.com/) — the classic 1996 MMORPG where creativity, roleplay, and community came first.
+```
+opendreams/
+├── client/
+│   └── dreamloom/          # Godot 4 game client
+│       ├── scenes/         # Game scenes (main.tscn)
+│       ├── scripts/        # GDScript files
+│       ├── assets/         # Game assets (tiles, sprites, audio)
+│       └── project.godot   # Godot project file
+│
+├── server/                 # Rust WebSocket server
+│   ├── src/
+│   │   └── main.rs         # Server implementation
+│   ├── Cargo.toml          # Rust dependencies
+│   └── README.md           # Server documentation
+│
+├── assets/                 # Shared asset source files
+│   ├── tiles/              # Isometric tile assets
+│   ├── sprites/            # Character and object sprites
+│   └── audio/              # Sound effects and music
+│
+└── docs/                   # Documentation
+    ├── GDD.md              # Game Design Document
+    ├── PROJECT.md          # Project information
+    └── CONTRIBUTING.md     # Contribution guidelines
+```
 
-We're weaving together:
-- 🏠 **Cozy isometric worlds** — tile-based environments with nostalgic warmth
-- 🎭 **Social & roleplay focus** — conversation and storytelling over combat
-- 🎨 **User-created "dreams"** — build and share your own spaces
-- 🎲 **Optional RPG mechanics** — character sheets, dice rolls, stats (think Roll20 meets Furcadia)
-- 🤖 **AI enhancement** — scene descriptions, NPC dialogue, creation assistance
-- 🌐 **Self-hostable shards** — run your own server for your community
+## 🚀 Getting Started
 
-## Current Status
+### Prerequisites
 
-🚧 **Phase 0: Foundation** — We're establishing the project structure, core design documents, and building community.
+**For the Client:**
+- [Godot 4.4+](https://godotengine.org/download)
 
-This is the ground floor. If you want to shape what DreamLoom becomes, now is the time to get involved.
+**For the Server:**
+- [Rust 1.70+](https://rustup.rs/)
+- Cargo (comes with Rust)
 
-## Quick Links
+### Running the Server
 
-- 📖 [PROJECT.md](PROJECT.md) — Full vision, roadmap, and technical direction
-- 📝 [CONTRIBUTING.md](CONTRIBUTING.md) — How to get involved
-- 🎮 [GDD.md](docs/GDD.md) — Game Design Document (coming soon)
-- 💬 Discord: *Coming soon*
+1. Navigate to the server directory:
+```bash
+cd server
+```
 
-## Why DreamLoom?
+2. Build and run the server:
+```bash
+cargo run
+```
 
-Furcadia proved that a graphical social world focused on creativity and community could thrive for decades. But it's 2025, and we can do better:
+The server will start on `ws://localhost:8080`
 
-- **Open source** — No corporate gatekeepers. The community owns this.
-- **Self-hostable** — Run your own shard with your own rules.
-- **Modern tools** — Better text UI (finally!), AI assistance, integrated RPG mechanics.
-- **Accessible** — Low system requirements, web client planned.
+You should see:
+```
+🌙 DreamLoom Server Starting...
+✨ Server listening on: 127.0.0.1:8080
+📡 WebSocket endpoint: ws://127.0.0.1:8080
+```
 
-## Tech Stack (Planned)
+### Running the Client
 
-| Component | Technology |
-|-----------|------------|
-| Client | Godot 4.x |
-| Server | Rust or Go |
-| Database | PostgreSQL + Redis |
-| Protocol | WebSocket |
-| AI | Local (Ollama) or Cloud APIs |
+1. Open Godot 4.4 or later
 
-## Getting Started
+2. Click "Import" and navigate to:
+```
+client/dreamloom/project.godot
+```
 
-*Coming soon* — We're still in the design phase. Star/watch the repo to follow progress!
+3. Click "Import & Edit"
 
-For now, you can:
-1. Read [PROJECT.md](PROJECT.md) to understand the vision
-2. Check [CONTRIBUTING.md](CONTRIBUTING.md) to see how you can help
-3. Join discussions in Issues and Discussions
+4. Press F5 or click the Play button to run the game
 
-## Contributing
+5. You should see:
+   - A connection status indicator (top-left)
+   - A chat panel (bottom-left)
+   - A player character you can move with WASD or Arrow keys
 
-We welcome contributors of all kinds:
+## 🎯 Current Features
 
-- **Developers** — Client, server, tools
-- **Artists** — Tiles, avatars, UI, concept art
-- **Writers** — Lore, documentation, tutorials
-- **Designers** — UX, game mechanics, systems
-- **Testers** — Break things so we can fix them
-- **Community builders** — Moderation, outreach, support
+### Client (Godot)
+- ✅ Isometric movement system (WASD/Arrow keys)
+- ✅ WebSocket connection to server
+- ✅ Real-time chat system
+- ✅ Connection status indicator
+- ✅ Camera follows player
+- ✅ Proper input handling for isometric coordinates
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+### Server (Rust)
+- ✅ WebSocket server on port 8080
+- ✅ Connection handling with unique player IDs
+- ✅ Chat message broadcasting
+- ✅ Player join/leave notifications
+- ✅ Position update broadcasting
+- ✅ Async/await with Tokio
 
-## License
+## 🧪 Testing the Connection
 
-This project is licensed under **AGPL-3.0** — ensuring it stays open source even when hosted as a service.
+Once both server and client are running:
 
-Assets may have separate licenses (CC-BY-SA for art, etc.) — see individual asset directories.
+1. Type a message in the chat box
+2. Press Enter to send
+3. You should see your message appear in the chat history
+4. If you run multiple clients, they'll all see each other's messages
+
+## 🎨 Isometric Specifications
+
+DreamLoom uses standard isometric projection:
+
+- **Tile Size:** 64×32 pixels (base)
+- **Perspective:** 2:1 ratio isometric
+- **Angle:** 26.565° (arctan 0.5)
+- **Movement:** Cartesian input converted to isometric coordinates
+
+## 🛠️ Next Steps
+
+This is the foundation! The basic architecture is now in place. Next steps include:
+
+- [ ] TileMap setup with isometric tiles
+- [ ] Multiple player rendering
+- [ ] Character customization
+- [ ] Dream creation tools
+- [ ] RPG mechanics (dice, character sheets)
+- [ ] AI integration for art generation
+- [ ] Database persistence (PostgreSQL)
+- [ ] Authentication system
+
+## 📖 Documentation
+
+- **[Game Design Document](docs/GDD.md)** - Full vision and design
+- **[Project Information](docs/PROJECT.md)** - Project details
+- **[Contributing Guide](docs/CONTRIBUTING.md)** - How to contribute
+
+## 🤝 Contributing
+
+DreamLoom is open source (AGPL-3.0) and welcomes contributions!
+
+See [CONTRIBUTING.md](docs/CONTRIBUTING.md) for guidelines.
+
+## 🔗 Protocol Reference
+
+### Client → Server
+
+```json
+{"type": "join", "name": "PlayerName"}
+{"type": "chat", "text": "Hello!"}
+{"type": "move", "to": {"x": 100, "y": 200}}
+```
+
+### Server → Client
+
+```json
+{"type": "system", "text": "System message"}
+{"type": "chat", "from": "PlayerName", "text": "Hello!"}
+{"type": "position", "avatar_id": "uuid", "pos": {"x": 100, "y": 200}}
+```
+
+## 📝 License
+
+AGPL-3.0 - See [LICENSE](LICENSE) for details
+
+## 🌟 Philosophy
+
+**Community over commerce.** DreamLoom will never have pay-to-win mechanics, lootboxes, or paywalled gameplay features.
+
+The codebase stays open forever, sustained by community contributions, grants, and optional services around the free core.
 
 ---
 
