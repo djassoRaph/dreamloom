@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://cgvt8u4rxg0hy"]
+[gd_scene load_steps=5 format=3 uid="uid://cgvt8u4rxg0hy"]
 
 [ext_resource type="Script" uid="uid://cwokrg6tm8xd" path="res://scripts/world.gd" id="1_a0qop"]
 [ext_resource type="Script" uid="uid://bbyr8u3rgw7y7" path="res://scripts/player.gd" id="2_player"]
+[ext_resource type="PackedScene" uid="uid://b2umapmenal76" path="res://scenes/world_map.tscn" id="3_world_map"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(16, 32)
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_a0qop")
@@ -10,8 +14,7 @@ script = ExtResource("1_a0qop")
 position = Vector2(640, 360)
 zoom = Vector2(2, 2)
 
-[node name="TileMap" type="TileMap" parent="."]
-format = 2
+[node name="WorldMap" parent="." instance=ExtResource("3_world_map")]
 
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(640, 360)
@@ -22,6 +25,8 @@ modulate = Color(0.4, 0.7, 1, 1)
 offset = Vector2(0, -16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_1")
 
 [node name="UI" type="CanvasLayer" parent="."]
 

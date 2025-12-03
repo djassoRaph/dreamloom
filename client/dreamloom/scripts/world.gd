@@ -5,7 +5,7 @@ extends Node2D
 
 @onready var camera = $Camera2D
 @onready var player = $Player
-@onready var tilemap = $TileMap
+@onready var world_map = $WorldMap
 @onready var chat_history = $UI/ChatPanel/VBoxContainer/ChatHistory
 @onready var chat_input = $UI/ChatPanel/VBoxContainer/ChatInput
 @onready var connection_status = $UI/ConnectionStatus
@@ -21,6 +21,9 @@ func _ready():
 	# Connect chat input
 	chat_input.text_submitted.connect(_on_chat_submitted)
 
+	# Set player spawn position from world map
+	player.position = world_map.get_spawn_position()
+	
 	# Setup camera to follow player
 	camera.position = player.position
 

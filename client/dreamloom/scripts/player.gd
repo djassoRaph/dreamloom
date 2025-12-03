@@ -7,9 +7,12 @@ const SPEED = 200.0
 const ISOMETRIC_RATIO = Vector2(2, 1)  # 2:1 isometric projection
 
 @onready var sprite = $Sprite2D
+var world_map = null
 
 func _ready():
 	print("Player initialized at position: ", position)
+	# Get reference to world map for collision checking
+	world_map = get_parent().get_node("WorldMap")
 
 func _physics_process(_delta):
 	# Get input direction
@@ -18,7 +21,20 @@ func _physics_process(_delta):
 	if input_direction != Vector2.ZERO:
 		# Convert to isometric coordinates
 		var iso_direction = _cartesian_to_isometric(input_direction)
-		velocity = iso_direction.normalized() * SPEED
+		var desired_velocity = iso_direction.normalized() * SPEED
+		
+		# Check if the target position would be walkable
+		var future_position = global_position + desired_velocity * _delta
+		var tile_map = world_map.tile_map if world_map else null
+		
+		if tile_map and world_map:
+			var target_tile_pos = tile_map.local_to_map(future_position)
+			if world_map.is_walkable(target_tile_pos):
+				velocity = desired_velocity
+			else:
+				velocity = Vector2.ZERO
+		else:
+			velocity = desired_velocity
 
 		# Flip sprite based on direction
 		if input_direction.x != 0:
